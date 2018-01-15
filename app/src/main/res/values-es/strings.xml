@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android_Watcher</string>
+    <string name="appwidget_text">Visualizador</string>
+    <string name="configure">Configura</string>
+    <string name="add_widget">Añadir widget</string>
+</resources>

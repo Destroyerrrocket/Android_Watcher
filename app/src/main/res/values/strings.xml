@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android_Watcher</string>
+    <string name="appwidget_text">Watcher</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="unknown">unknown</string>
+    <string name="reload">reload</string>
+    <string name="Module1">Module 1</string>
+</resources>

@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainLayoutFather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#09C"
@@ -31,13 +32,13 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <!--<ToggleButton
-        android:id="@+id/toggleButton"
+    <Button
+        android:id="@+id/Refresh_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="@string/reload"
-        tools:text="@string/reload" />-->
+        android:layout_below="@+id/appwidget_text"
+        android:text="Refresh"
+        android:visibility="visible" />
 
 </RelativeLayout>

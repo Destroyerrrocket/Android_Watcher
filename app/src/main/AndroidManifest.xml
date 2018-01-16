@@ -21,8 +21,8 @@
         <receiver android:name=".MainWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.pol.androwatch.WIDGET_BUTTON" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/main_widget_info" />

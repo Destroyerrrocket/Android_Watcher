@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
  * The configuration screen for the {@link MainWidget MainWidget} AppWidget.
@@ -26,14 +25,14 @@ public class MainWidgetConfigureActivity extends Activity {
 
             // When the button is clicked, store the string locally
             String widgetText = NameOfTheWidgetText.getText().toString();
-            saveTitlePref(context, mAppWidgetId, 0, widgetText);
-            saveTitlePref(context, mAppWidgetId, 1, "TRUE");
+            saveDataPref(context, mAppWidgetId, 0, widgetText);
+            saveDataPref(context, mAppWidgetId, 1, "TRUE");
             // It is the responsibility of the configuration activity to update the app widget
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int ids[] = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, MainWidget.class));
             for (int id : ids) {
-                if (loadTitlePref(context, id, 1).equals("TRUE")) {
-                    saveTitlePref(context, mAppWidgetId, 1, "FALSE");
+                if (loadDataPref(context, id, 1).equals("TRUE")) {
+                    saveDataPref(context, mAppWidgetId, 1, "FALSE");
                 }
             }
             MainWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
@@ -51,7 +50,7 @@ public class MainWidgetConfigureActivity extends Activity {
     }
 
     // Write the prefix to the SharedPreferences object for this widget
-    static void saveTitlePref(Context context, int appWidgetId, int index, String text) {
+    static void saveDataPref(Context context, int appWidgetId, int index, String text) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putString(PREF_PREFIX_KEY + appWidgetId + index, text);
         prefs.apply();
@@ -59,7 +58,7 @@ public class MainWidgetConfigureActivity extends Activity {
 
     // Read the prefix from the SharedPreferences object for this widget.
     // If there is no preference saved, get the default from a resource
-    static String loadTitlePref(Context context, int appWidgetId, int index) {
+    static String loadDataPref(Context context, int appWidgetId, int index) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
         String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId + index, null);
         if (titleValue != null) {
@@ -69,9 +68,9 @@ public class MainWidgetConfigureActivity extends Activity {
         }
     }
 
-    static void deleteTitlePref(Context context, int appWidgetId) {
+    static void deleteDataPref(Context context, int appWidgetId, int index) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        prefs.remove(PREF_PREFIX_KEY + appWidgetId);
+        prefs.remove(PREF_PREFIX_KEY + appWidgetId + index);
         prefs.apply();
     }
 
@@ -101,7 +100,7 @@ public class MainWidgetConfigureActivity extends Activity {
             return;
         }
         
-        NameOfTheWidgetText.setText(loadTitlePref(MainWidgetConfigureActivity.this, mAppWidgetId, 0));
+        NameOfTheWidgetText.setText(loadDataPref(MainWidgetConfigureActivity.this, mAppWidgetId, 0));
     }
 }
 

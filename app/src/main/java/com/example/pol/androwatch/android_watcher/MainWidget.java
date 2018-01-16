@@ -3,19 +3,11 @@ package com.example.pol.androwatch.android_watcher;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.nfc.Tag;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.RemoteViews;
 import android.view.View;
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.widget.RemoteViews;
-import android.widget.TextView;
 
 /**
  * Implementation of App Widget functionality.
@@ -29,11 +21,11 @@ public class MainWidget extends AppWidgetProvider {
 
         //determine OPTIONAL parameters.
 
-        boolean noButton = MainWidgetConfigureActivity.loadTitlePref(context, appWidgetId, 1) == "FALSE";;
+        boolean noButton = MainWidgetConfigureActivity.loadDataPref(context, appWidgetId, 1) == "FALSE";;
 
         //declare data
 
-        String widgetText = MainWidgetConfigureActivity.loadTitlePref(context, appWidgetId, 0);
+        String widgetText = MainWidgetConfigureActivity.loadDataPref(context, appWidgetId, 0);
         String currentIP = Utils.getIPAddress(true);
         if (currentIP.equals("")) {
             currentIP = "IP: Unknown";
@@ -78,7 +70,8 @@ public class MainWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         // When the user deletes the widget, delete the preference associated with it.
         for (int appWidgetId : appWidgetIds) {
-            MainWidgetConfigureActivity.deleteTitlePref(context, appWidgetId);
+            MainWidgetConfigureActivity.deleteDataPref(context, appWidgetId, 0);
+            MainWidgetConfigureActivity.deleteDataPref(context, appWidgetId, 1);
         }
     }
 
